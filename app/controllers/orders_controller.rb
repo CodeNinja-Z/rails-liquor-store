@@ -1,25 +1,24 @@
 class OrdersController < ApplicationController
   def create
-    @order = Order.new(order_params)
-    if @order.save
-      redirect_to root_path
-    else
-      redirect_to root_path
-    end
+    @cart = current_cart
+    @order = @cart.orders.new(order_params)
+    @order.save
+    @cart.subtotal = @cart.calculate_subtotal
+    @orders = @cart.orders
   end
 
   def update
-    @order = Order.find([:id])
-    if @order.update_attributes(order_params)
-      redirect_to root_path
-    else
-      redirect_to root_path
-    end
+    @cart = current_cart
+    @order = @cart.orders.find(params[:id])
+    @order.update_attributes(order_params)
+    @orders = @cart.orders
   end
 
   def destroy
-    @order = Order.find(params[:id])
+    @cart = current_cart
+    @order = @cart.orders.find(params[:id])
     @order.destroy
+    @orders = @cart.orders
   end
 
   private
