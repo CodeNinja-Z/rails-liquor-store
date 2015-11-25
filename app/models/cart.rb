@@ -9,4 +9,6 @@ class Cart < ActiveRecord::Base
     end
     return subtotal
   end
+  # Try to rewrite this method using .map
+  # Q: Is self.orders a set or an array? since .map can only be applied to array.
 end
