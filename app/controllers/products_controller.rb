@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
     else
       @cart = Cart.new
     end
-    session[:cart_id] = cart.id
+    session[:cart_id] = @cart.id
     @orders = @cart.orders
     @order = @cart.orders.new
     @products = Product.all
