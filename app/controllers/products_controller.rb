@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
     if current_cart
       @cart = current_cart
     else
-      @cart = Cart.new
+      @cart = Cart.create!
     end
     session[:cart_id] = @cart.id
     @orders = @cart.orders
